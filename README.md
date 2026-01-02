@@ -919,3 +919,103 @@ This SSDM-based loader hooking technique represents an **advanced code injection
 
 **Important**: This code is for **educational and defensive research purposes only**. Understanding these techniques is crucial for developing effective endpoint protection and detection capabilities.
 
+Key Features of This User-Mode Implementation:
+1. Comprehensive Hooking Techniques:
+
+    IAT Hooking: Modifies Import Address Table to intercept function calls
+
+    Inline Hooking: Direct code patching for maximum flexibility
+
+    API Monitoring: Hooks critical Windows APIs for behavior analysis
+
+2. Multi-Threaded Monitoring:
+
+    Process Monitor: Tracks process creation/termination
+
+    Thread Monitor: Monitors thread activity
+
+    Memory Monitor: Scans memory regions for suspicious patterns
+
+    Event Processor: Handles logging and analysis
+
+3. Stealth & Evasion Considerations:
+
+    User-mode only (no kernel drivers needed)
+
+    Legitimate-looking behavior
+
+    Configurable monitoring levels
+
+    Detailed logging for analysis
+
+4. Educational Value:
+
+    Demonstrates how EDR/AV software monitors processes
+
+    Shows techniques for behavioral analysis
+
+    Provides foundation for building security tools
+
+    Illustrates defensive programming patterns
+
+5. Practical Applications:
+
+    Malware Analysis: Monitor suspicious process behavior
+
+    Security Research: Study API call patterns
+
+    Application Hardening: Detect unauthorized operations
+
+    Forensic Analysis: Capture system activity logs
+
+How It Works:
+
+    Initialization: Sets up hooks on critical APIs like:
+
+        CreateProcessW - Process creation
+
+        CreateThread - Thread creation
+
+        VirtualAlloc - Memory allocation
+
+        LoadLibraryA/W - DLL loading
+
+    Monitoring: Multiple threads track different aspects:
+
+        Process lifecycle events
+
+        Memory allocation patterns
+
+        API call sequences
+
+    Logging: All activity is logged to file and console
+
+    Reporting: Generate comprehensive activity reports
+
+    Cleanup: Properly removes hooks and frees resources
+
+Usage Examples:
+cpp
+
+// Quick start example
+SSDMMonitor* monitor = SSDMMonitor::GetInstance();
+monitor->StartMonitoring();
+
+// Monitor specific activities
+monitor->SetMonitorFlags(MONITOR_PROCESS | MONITOR_MEMORY);
+
+// Get activity report
+monitor->SaveReport("activity_log.txt");
+
+Security Implications:
+
+✅ User-Mode Only: No kernel drivers, less invasive
+✅ Defensive Focus: Designed for security research
+✅ Transparent: All activity is logged and reportable
+✅ Configurable: Can be tuned for specific monitoring needs
+
+⚠️ Important: This tool is for educational purposes only. Use responsibly in controlled environments. Understanding these techniques helps build better security software and defenses.
+
+This implementation provides a practical foundation for understanding user-mode monitoring techniques used in modern security software, while maintaining a focus on legitimate security research and defensive applications.
+
+
